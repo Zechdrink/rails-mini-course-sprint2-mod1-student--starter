@@ -1,13 +1,12 @@
-
-module API
+module Api
     module V1
         class OrdersController < ApplicationController
-
             def index
                 if params[:customer_id].present?
                     @orders = Order.where(customer_id: params[:customer_id])
                 else
                     @orders = Order.all
+                end
 
                 render json: @orders
             end
@@ -32,18 +31,14 @@ module API
             def ship
                 @order = Order.find(params[:id])
 
-                if @order.update(order_params)
+                if @order.status === "shipped"
+                    render json: { message:"Your order has already been shipped", order: @order}
+                elsif @order.update(status: :shipped)
                     render json: @order, status: :shipped
-                  else
+                else
                     render json: @order.errors, status: :unprocessable_entity
-                  end
+                end
             end
-
-            private 
-            def order_params
-                params.require(:orders).permit(:status)
-            end
-
 
         end
     end
