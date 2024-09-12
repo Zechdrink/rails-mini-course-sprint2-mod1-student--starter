@@ -83,29 +83,35 @@ We need to add new routes for our orders resource.
 | GET  | order    | /api/v1/orders                        | api/v1/orders#index    | list all orders                |
 | GET  | order    | /api/v1/customers/:customer_id/orders | api/v1/orders#index    | list all orders for a customer |
 | POST | order    | /api/v1/customers/:customer_id/orders | api/v1/orders#create   | create an order for a customer |
-| GET  | order    | /api/v1/orders/:id                    | api/v1/orders#show     | get a specific order           |
+| GET  | order    | /api/v1/orders/:id                    | api/v1/orders#show     | get a specific order           
+|
 | POST | order    | /api/v1/orders/:id/ship               | api/v1/orders#ship     | ship a specific order          |
+
+
 | GET  | product  | /api/v1/orders/:order_id/products     | api/v1/products#index  | list all products for an order |
+
 | POST | product  | /api/v1/orders/:order_id/products     | api/v1/products#create | add a product to an order      |
 
 1. Add the order route to list all orders
 2. Add the order route to show a specific order
 3. Add a custom POST member route to the orders resource to `ship` an order
 4. Nested within the order resource, add the products routes to list and create products
-5. Nested within the customer resource, add the order routes to list and create orders
+5. Nested within the cus,tomer resource add the order routes to list and create orders
 6. Limit new routes to only the ones expected above
 
 ## Step Three - Add Orders Controller
 
 Create an orders controller and implement the `index`, `create`, `show` and `ship` actions to respond to the routes you created. All the actions should return an appropriate JSON response.
 
-1. The orders index should work for showing all orders and orders scoped to a specific customer
+<!-- 1. The orders index should work for showing all orders and orders scoped to a specific customer
 
    - If a `customer_id` param is present, set `@orders = Order.where(customer_id: params[:customer_id])`
    - If `customer_id` is not present, set `@orders = Order.all`
-   - Render `@orders` as json
+   - Render `@orders` as json -->
 
-2. The orders `create` action should set the `customer_id` attribute and default the status to "pending"
-3. The orders `show` action should get a specific order from the database
-4. The custom `ship` action should update the order status to `"shipped"` and render the order as JSON
+<!-- 2. The orders `create` action should set the `customer_id` attribute and default the status to "pending" -->
+<!-- 
+3. The orders `show` action should get a specific order from the database -->
+
+<!-- 4. The custom `ship` action should update the order status to `"shipped"` and render the order as JSON -->
 5. There should be no update or destroy actions
